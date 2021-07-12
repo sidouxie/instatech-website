@@ -1,0 +1,44 @@
+.main-form {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 4rem;
+
+  form {
+    max-width: 600px;
+    height: auto;
+    background: #673ab726;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    padding: 2rem;
+
+    input {
+      margin: 0.5rem 0;
+    }
+
+    .btn-style {
+      @include btn-style;
+    }
+
+    .active {
+      border: 1px red solid;
+    }
+
+    .error {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: red;
+      margin: 0.5rem 0;
+      text-transform: lowercase;
+    }
+  }
+}
