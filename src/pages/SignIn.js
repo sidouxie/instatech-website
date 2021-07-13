@@ -10,7 +10,6 @@ function SignIn({ uid }) {
   const [isErrorPass, setIsErrorPass] = useState(false);
 
   const history = useHistory();
-  console.log(history);
 
   const handleSubmit = async (e) => {
     const emailError = document.querySelector(".email.error");

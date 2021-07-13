@@ -49,9 +49,20 @@
     justify-content: center;
     margin-bottom: 4rem;
 
+    h2 {
+      color: $color-200;
+    }
+
     .section-bio {
       padding: 0 1rem;
       text-align: center;
+
+      p {
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #63577b;
+        margin: 0;
+      }
 
       .btn-style {
         @include btn-style;
@@ -89,28 +100,35 @@
     }
 
     .timestamp {
-      color: $color-400;
+      color: #63577bbd;
     }
 
     .sec-follow {
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+      justify-items: center;
 
       .followers {
         width: 50%;
-        height: 100%;
         display: inline-flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: #4f259e14;
+        padding: 1rem;
+        border-radius: 7px;
+        border: 1px #4f259e38 solid;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 0px 0px 2px #63577b;
+        }
 
         .first {
           width: 100%;
-          height: 100%;
+
           display: inline-flex;
           flex-direction: row;
           justify-content: center;
@@ -118,25 +136,38 @@
 
           h4 {
             margin: 0;
-            margin-left: 1.5rem;
+            margin-left: 0.5rem;
+            color: #63577b;
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: -1.5px;
           }
         }
         h3 {
           margin: 0;
+          color: #63577b;
+          font-size: 0.9rem;
+          font-weight: 500;
         }
       }
 
       .following {
         width: 50%;
-        height: 100%;
         display: inline-flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: #4f259e14;
+        padding: 1rem;
+        border-radius: 7px;
+        border: 1px #4f259e38 solid;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 0px 0px 2px #63577b;
+        }
 
         .first {
           width: 100%;
-          height: 100%;
           display: inline-flex;
           flex-direction: row;
           justify-content: center;
@@ -144,12 +175,108 @@
 
           h4 {
             margin: 0;
-            margin-left: 1.5rem;
+            margin-left: 0.5rem;
+            color: #63577b;
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: -1.5px;
           }
         }
 
         h3 {
           margin: 0;
+          color: #63577b;
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.modal-popup {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #263556;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .followers-popup {
+    width: 80%;
+    height: 60%;
+    background: aquamarine;
+    position: relative;
+
+    svg {
+      cursor: pointer;
+      padding: 1rem;
+      right: 0;
+      display: inline-block;
+      position: absolute;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+      list-style: none;
+      position: relative;
+      width: inherit;
+      height: inherit;
+      margin: 0 auto;
+      padding: 0;
+
+      li {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: inherit;
+
+        .follow-btn {
+          background: transparent;
+          border: 3px $color-primary solid;
+          border-radius: 15px;
+          padding: 0.2rem 0.5rem;
+          color: $color-primary;
+          font-weight: 400;
+          cursor: pointer;
+          &:hover {
+            background-color: $color-primary;
+            color: #fff;
+          }
+        }
+
+        .unfollow-btn {
+          background: $color-primary;
+          border: 3px $color-primary solid;
+          border-radius: 15px;
+          padding: 0.2rem 0.5rem;
+          color: #fff;
+          font-weight: 400;
+          cursor: pointer;
+          &:hover {
+            background-color: transparent;
+            color: $color-primary;
+          }
+        }
+
+        img {
+          width: 46px;
+          height: 46px;
+          object-fit: cover;
+          object-position: top;
+          border-radius: 50%;
+          border: 3px #4f259e solid;
+          background-color: #4f259e;
         }
       }
     }

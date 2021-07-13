@@ -10,6 +10,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import { getUsers } from "./actions/users.actions";
 
 dotenv.config({ path: "../.env" });
 
@@ -17,6 +18,8 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+store.dispatch(getUsers());
 
 ReactDOM.render(
   <React.StrictMode>
