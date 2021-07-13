@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { isEmpty } from "./Utils";
+import { dateParser, isEmpty } from "./Utils";
 import {
   IoEllipsisHorizontal,
-  IoHeartOutline,
   IoChatbubblesOutline,
   IoArrowRedoOutline,
 } from "react-icons/io5";
+import LikeBtn from "./LikeBtn";
 
 function Card({ post }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,18 +27,31 @@ function Card({ post }) {
             <div className="card-head">
               <img
                 className="avatar-icon"
-                src="./uploads/profil/avatar_user.jpg"
+                src={
+                  !isEmpty(usersData[0]) &&
+                  usersData
+                    .map((user) => {
+                      if (user._id === post.posterId) return user.picture;
+                    })
+                    .join("")
+                }
                 alt="avatar user profil"
               />
               <div className="sec-name">
-                <h3>Neville Griffin</h3>
-                <p>Today at 9.29 AM</p>
+                <h3>
+                  {!isEmpty(usersData[0]) &&
+                    usersData.map((user) => {
+                      if (user._id === post.posterId) return user.pseudo;
+                      else return null;
+                    })}
+                </h3>
+                <p>{dateParser(post.createdAt)}</p>
               </div>
               <IoEllipsisHorizontal size="1.5rem" color="#333" />
             </div>
 
             <div className="card-content">
-              <p>Travelling to Australia</p>
+              <p>{post.message}</p>
               <div className="sec-image">
                 <img
                   src="./uploads/cover/cover_profil.jpg"
@@ -49,10 +62,7 @@ function Card({ post }) {
 
             <div className="card-footer">
               <div className="icons-card">
-                <div className="like">
-                  <IoHeartOutline size="1.8rem" color="#8c8c8c" />
-                  <span>25</span>
-                </div>
+                <LikeBtn post={post} />
 
                 <div className="comment">
                   <IoChatbubblesOutline size="1.8rem" color="#8c8c8c" />
