@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "./Utils";
 import {
   IoEllipsisHorizontal,
   IoChatbubblesOutline,
+  IoChatbubbles,
   IoArrowRedoOutline,
 } from "react-icons/io5";
 import LikeBtn from "./LikeBtn";
+import { updatePost } from "../actions/post.actions";
+import DeleteCard from "./DeleteCard";
+import CommentCard from "./CommentCard";
 
 function Card({ post }) {
   const [isLoading, setIsLoading] = useState(true);
-  const userData = useSelector((state) => state.userReducer);
+  const [isUpdated, setIsUpdated] = useState(false);
+  const [textUpdate, setTextUpdate] = useState(null);
+  const [showComment, setShowComment] = useState(false);
+
   const usersData = useSelector((state) => state.usersReducer);
+  const userData = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
+  const updateItem = () => {
+    if (textUpdate) {
+      dispatch(updatePost(post._id, textUpdate));
+    }
+    setIsUpdated(false);
+  };
 
   useEffect(() => {
     !isEmpty(usersData[0]) && setIsLoading(false);
@@ -32,6 +48,7 @@ function Card({ post }) {
                   usersData
                     .map((user) => {
                       if (user._id === post.posterId) return user.picture;
+                      else return null;
                     })
                     .join("")
                 }
@@ -47,11 +64,42 @@ function Card({ post }) {
                 </h3>
                 <p>{dateParser(post.createdAt)}</p>
               </div>
-              <IoEllipsisHorizontal size="1.5rem" color="#333" />
+              {userData._id === post.posterId ? (
+                <IoEllipsisHorizontal
+                  onClick={() => setIsUpdated(!isUpdated)}
+                  size="1.5rem"
+                  color="#333"
+                />
+              ) : (
+                <div className="chombit"></div>
+              )}
             </div>
 
             <div className="card-content">
-              <p>{post.message}</p>
+              {isUpdated ? (
+                <div className="update-post">
+                  <textarea
+                    defaultValue={post.message}
+                    onChange={(e) => setTextUpdate(e.target.value)}
+                  />
+
+                  <div className="btn-container">
+                    <button onClick={updateItem} className="btn">
+                      {" "}
+                      valider modification
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p>{post.message}</p>
+              )}
+
+              {userData._id === post.posterId && (
+                <div className="sec-icones">
+                  <DeleteCard id={post._id} />
+                </div>
+              )}
+
               <div className="sec-image">
                 <img
                   src="./uploads/cover/cover_profil.jpg"
@@ -65,8 +113,20 @@ function Card({ post }) {
                 <LikeBtn post={post} />
 
                 <div className="comment">
-                  <IoChatbubblesOutline size="1.8rem" color="#8c8c8c" />
-                  <span>25</span>
+                  {showComment ? (
+                    <IoChatbubbles
+                      onClick={() => setShowComment(!showComment)}
+                      size="1.8rem"
+                      color="#f3be00"
+                    />
+                  ) : (
+                    <IoChatbubblesOutline
+                      onClick={() => setShowComment(!showComment)}
+                      size="1.8rem"
+                      color="#8c8c8c"
+                    />
+                  )}
+                  <span>{post.comments ? post.comments.length : null}</span>
                 </div>
 
                 <div className="share">
@@ -74,6 +134,8 @@ function Card({ post }) {
                   <span>25</span>
                 </div>
               </div>
+
+              {showComment && <CommentCard post={post} />}
             </div>
           </>
         )}

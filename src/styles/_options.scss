@@ -75,3 +75,15 @@ $color-600: #f8f8f8;
     transition: all 150ms ease-out;
   }
 }
+
+/* style input */
+
+@mixin input {
+  border: 1px #5c4880 solid;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: $color-200;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
