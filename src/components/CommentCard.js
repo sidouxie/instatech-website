@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { isEmpty } from "./Utils";
 
 function CommentCard({ post }) {
-  const [text, setText] = useState("");
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
-
-  const handleComment = () => {};
 
   return (
     <>
