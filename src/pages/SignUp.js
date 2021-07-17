@@ -36,10 +36,8 @@ function SignUp({ uid }) {
       await axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/api/user/register`,
-        credentials: {
-          withCredentials: true,
-          Credential: "include",
-        },
+        withCredentials: true,
+
         data: {
           pseudo,
           email,

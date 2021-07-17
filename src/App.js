@@ -15,10 +15,7 @@ function App() {
       await axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/jwtid`,
-        credentials: {
-          withCredentials: true,
-          Credential: "include",
-        },
+        withCredentials: true,
       })
         .then((res) => setUid(res.data))
         .catch((err) => console.log(err));
