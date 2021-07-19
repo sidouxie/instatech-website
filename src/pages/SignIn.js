@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 function SignIn({ uid }) {
   const [email, setEmail] = useState("");
@@ -19,16 +20,13 @@ function SignIn({ uid }) {
     await axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
-
       withCredentials: true,
-
       data: {
         email,
         password,
       },
     })
       .then((res) => {
-        console.log(res);
         if (res.data.errors) {
           if (res.data.errors.email) {
             emailError.innerHTML = res.data.errors.email;
@@ -46,6 +44,7 @@ function SignIn({ uid }) {
             passwordError.innerHTML = null;
           }
         } else {
+          Cookies.set("_GO", res.data.token);
           history.go("/");
         }
       })

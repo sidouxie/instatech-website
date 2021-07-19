@@ -18,6 +18,7 @@ function Logout() {
     })
       .then(() => {
         removeCookie("jwt");
+        removeCookie("_GO");
       })
       .catch((err) => {
         console.log(err);
