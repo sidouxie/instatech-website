@@ -21,6 +21,7 @@ function App() {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
             Accept: "/",
             "Cache-Control": "no-cache",
             Authorization: `Bearer ${token}`,
@@ -29,13 +30,12 @@ function App() {
         })
           .then((res) => {
             setUid(res.data);
+            dispatch(getUser(uid));
           })
           .catch((err) => console.log(err));
       };
       fetchToken();
     }
-
-    if (uid) dispatch(getUser(uid));
   }, [uid, dispatch, token]);
   return (
     <UidContext.Provider value={uid}>
