@@ -21,6 +21,10 @@ function SignIn({ uid }) {
       method: "post",
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       withCredentials: true,
+      headers: {
+        "Content-Type": "application/JSON",
+        "Access-Control-Allow-Origin": "*",
+      },
       data: {
         email,
         password,
