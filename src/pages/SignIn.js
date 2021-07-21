@@ -21,10 +21,10 @@ function SignIn({ uid }) {
       method: "post",
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       withCredentials: true,
-      data: JSON.stringify({
+      data: {
         email,
         password,
-      }),
+      },
     })
       .then((res) => {
         if (res.data.errors) {
@@ -44,7 +44,7 @@ function SignIn({ uid }) {
             passwordError.innerHTML = null;
           }
         } else {
-          Cookies.set("_GO", res.data.token);
+          Cookies.set("_GO", res.data.token, { expires: 2, secure: true });
           history.go("/");
         }
       })

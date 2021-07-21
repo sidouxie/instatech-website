@@ -18,7 +18,7 @@ function App() {
         await axios({
           method: "get",
           url: `${process.env.REACT_APP_API_URL}/jwtid`,
-          credentials: "include",
+          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
             Accept: "/",
