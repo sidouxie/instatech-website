@@ -21,13 +21,10 @@ function SignIn({ uid }) {
       method: "post",
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       withCredentials: true,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      data: {
+      data: JSON.stringify({
         email,
         password,
-      },
+      }),
     })
       .then((res) => {
         if (res.data.errors) {

@@ -11,7 +11,6 @@ function App() {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
   const token = Cookies.get("_GO");
-  console.log(token);
 
   useEffect(() => {
     if (token) {
@@ -19,12 +18,13 @@ function App() {
         await axios({
           method: "get",
           url: `${process.env.REACT_APP_API_URL}/jwtid`,
-          withCredentials: true,
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
             Accept: "/",
             "Cache-Control": "no-cache",
-            authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
+            Cookie: `jwt=${token}`,
           },
         })
           .then((res) => {
