@@ -20,6 +20,10 @@ function SignIn({ uid }) {
     await axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
+      withCredentials: true,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       data: {
         email,
         password,
