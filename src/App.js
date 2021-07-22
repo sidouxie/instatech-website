@@ -25,17 +25,17 @@ function App() {
             Accept: "/",
             "Cache-Control": "no-cache",
             Authorization: `Bearer ${token}`,
-            Cookie: `jwt=${token}`,
           },
         })
           .then((res) => {
             setUid(res.data);
-            dispatch(getUser(uid));
           })
           .catch((err) => console.log(err));
       };
       fetchToken();
     }
+
+    if (uid) dispatch(getUser(uid));
   }, [uid, dispatch, token]);
   return (
     <UidContext.Provider value={uid}>

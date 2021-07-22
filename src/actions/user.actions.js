@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "../helpers/axiosInstance";
 
 export const GET_USER = "GET_USER";
 export const UPDATE_BIO = "UPDATE_BIO";
@@ -7,8 +8,10 @@ export const UNFOLLOW_USER = "UNFOLLOW_USER";
 
 export const getUser = (uid) => {
   return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_API_URL}/api/user/${uid}`)
+    return instance({
+      url: `/api/user/${uid}`,
+      method: "get",
+    })
       .then((res) => {
         dispatch({ type: GET_USER, payload: res.data });
       })

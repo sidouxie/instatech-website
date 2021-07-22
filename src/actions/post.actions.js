@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "../helpers/axiosInstance";
 
 // posts
 export const GET_POSTS = "GET_POSTS";
@@ -9,8 +10,10 @@ export const DELETE_POST = "DELETE_POST";
 
 export const getPosts = (num) => {
   return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_API_URL}/api/post`)
+    return instance({
+      url: "/api/post",
+      method: "get",
+    })
       .then((res) => {
         const array = res.data.slice(0, num);
         dispatch({ type: GET_POSTS, payload: array });

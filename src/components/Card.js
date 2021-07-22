@@ -69,6 +69,7 @@ function Card({ post }) {
                   onClick={() => setIsUpdated(!isUpdated)}
                   size="1.5rem"
                   color="#333"
+                  style={{ cursor: "pointer" }}
                 />
               ) : (
                 <div className="chombit"></div>
