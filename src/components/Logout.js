@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 function Logout() {
   const history = useHistory();
@@ -9,13 +8,10 @@ function Logout() {
   useEffect(() => {
     window.addEventListener("beforeunload", (e) => {
       e.preventDefault();
-      Cookies.remove("_GO");
+
+      localStorage.removeItem("_user");
     });
   }, []);
-
-  /* const removeCookie = (key) => {
-    Cookies.remove(key, { expires: 1 });
-  }; */
 
   const logout = async () => {
     await axios({
@@ -23,9 +19,8 @@ function Logout() {
       url: `${process.env.REACT_APP_API_URL}/api/user/logout`,
       withCredentials: true,
     })
-      .then((res) => {
-        Cookies.remove("_GO", { path: "/", expires: 1 });
-        console.log(res);
+      .then(() => {
+        localStorage.removeItem("_user");
       })
       .catch((err) => {
         console.log(err);

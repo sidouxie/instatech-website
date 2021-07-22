@@ -5,12 +5,12 @@ import Layout from "./components/Layout";
 import { UidContext } from "./components/AppContext";
 import axios from "axios";
 import { getUser } from "./actions/user.actions";
-import Cookies from "js-cookie";
 
 function App() {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
-  const token = Cookies.get("_GO");
+
+  const token = localStorage.getItem("_user");
 
   useEffect(() => {
     if (token) {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 function SignIn({ uid }) {
   const [email, setEmail] = useState("");
@@ -48,7 +47,7 @@ function SignIn({ uid }) {
             passwordError.innerHTML = null;
           }
         } else {
-          Cookies.set("_GO", res.data.token, { expires: 2, secure: true });
+          localStorage.setItem("_user", res.data.token);
           history.go("/");
         }
       })
