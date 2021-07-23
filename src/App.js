@@ -29,13 +29,12 @@ function App() {
         })
           .then((res) => {
             setUid(res.data);
+            dispatch(getUser(uid));
           })
           .catch((err) => console.log(err));
       };
       fetchToken();
-    }
-
-    if (uid) dispatch(getUser(uid));
+    } else return setUid(null);
   }, [uid, dispatch, token]);
   return (
     <UidContext.Provider value={uid}>

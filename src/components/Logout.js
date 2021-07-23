@@ -9,7 +9,7 @@ function Logout() {
     window.addEventListener("beforeunload", (e) => {
       e.preventDefault();
 
-      localStorage.removeItem("_user");
+      localStorage.clear();
     });
   }, []);
 

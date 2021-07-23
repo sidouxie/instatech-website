@@ -8,6 +8,10 @@ export const UNLIKE_POSTS = "UNLIKE_POSTS";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
+// comments
+export const ADD_COMMENT = "ADD_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+
 export const getPosts = (num) => {
   return (dispatch) => {
     return instance({
@@ -72,6 +76,41 @@ export const deletePost = (postId) => {
     })
       .then((res) => {
         dispatch({ type: DELETE_POST, payload: { postId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const addComment = (postId, commenterId, text, commenterPseudo) => {
+  return (dispatch) => {
+    return axios({
+      url: `${process.env.REACT_APP_API_URL}/api/post/comment-post/${postId}`,
+      method: "patch",
+      data: {
+        commenterId,
+        text,
+        commenterPseudo,
+      },
+    })
+      .then((res) => {
+        dispatch({ type: ADD_COMMENT, payload: { postId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const editComment = (postId, commentId, text) => {
+  return (dispatch) => {
+    return axios({
+      url: `${process.env.REACT_APP_API_URL}/api/post/edit-post/${postId}`,
+      method: "patch",
+      data: {
+        commentId,
+        text,
+      },
+    })
+      .then((res) => {
+        dispatch({ type: EDIT_COMMENT, payload: { postId, commentId, text } });
       })
       .catch((err) => console.log(err));
   };

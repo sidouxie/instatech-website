@@ -7,6 +7,20 @@ export const dateParser = (num) => {
   return date;
 };
 
+export const timestampParser = (num) => {
+  let options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  let date = new Date(num).toLocaleDateString("fr-FR", options);
+
+  return date.toString();
+};
+
 export const isEmpty = (value) => {
   return (
     value === undefined ||
