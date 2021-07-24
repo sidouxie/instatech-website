@@ -13,6 +13,11 @@ function Logout() {
     });
   }, []);
 
+  const effacer = async () => {
+    await localStorage.clear();
+    history.push("/");
+  };
+
   const logout = async () => {
     await axios({
       method: "get",
@@ -24,6 +29,7 @@ function Logout() {
       })
       .catch((err) => {
         console.log(err);
+        effacer();
         return history.go("/signin");
       });
   };

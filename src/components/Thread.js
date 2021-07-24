@@ -36,11 +36,7 @@ function Thread() {
           <ul>
             {!isEmpty(posts[0]) &&
               posts.map((post) => {
-                return (
-                  <>
-                    <Card key={post._id} post={post} />
-                  </>
-                );
+                return <Card key={post._id} post={post} />;
               })}
           </ul>
         </div>

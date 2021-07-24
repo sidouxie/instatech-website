@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UidContext } from "./AppContext";
-import { IoEllipsisVerticalCircleOutline } from "react-icons/io5";
+import {
+  IoEllipsisVerticalCircleOutline,
+  IoCloseOutline,
+  IoTrashBin,
+} from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { editComment } from "../actions/post.actions";
+import { deleteComment, editComment } from "../actions/post.actions";
 
 function EditDeleteComment({ comment, postId }) {
   const [isAuthor, setIsAuthor] = useState(false);
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState("");
   const uid = useContext(UidContext);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -18,6 +22,10 @@ function EditDeleteComment({ comment, postId }) {
       setText("");
       setEdit(false);
     }
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteComment(postId, comment._id));
   };
 
   useEffect(() => {
@@ -35,7 +43,7 @@ function EditDeleteComment({ comment, postId }) {
         {isAuthor && edit === false && (
           <span onClick={() => setEdit(!edit)}>
             <IoEllipsisVerticalCircleOutline
-              size="1.5rem"
+              size="2rem"
               color="#4f259e"
               style={{ cursor: "pointer" }}
             />
@@ -44,7 +52,12 @@ function EditDeleteComment({ comment, postId }) {
         {isAuthor && edit && (
           <form action="" onSubmit={handleEdit} className="edit-comment-form">
             <label htmlFor="text" onClick={() => setEdit(!edit)}>
-              Editer
+              <IoCloseOutline
+                size="2rem"
+                color="#4f259e"
+                cursor="pointer"
+                title="Annuler"
+              />
             </label>
             <br />
             <input
@@ -53,8 +66,27 @@ function EditDeleteComment({ comment, postId }) {
               onChange={(e) => setText(e.target.value)}
               defaultValue={comment.text}
             />
-            <br />
-            <button type="submit">valider</button>
+            <button type="submit" title="Validez la modification">
+              valider
+            </button>
+            <div className="delete-btn">
+              <span
+                onClick={() => {
+                  if (
+                    window.confirm("Voulez-vous supprimez ce commentaire ?")
+                  ) {
+                    handleDelete();
+                  }
+                }}
+              >
+                <IoTrashBin
+                  size="1.5rem"
+                  color="#4f259e"
+                  cursor="pointer"
+                  title="Supprimez le commentaire"
+                />
+              </span>
+            </div>
           </form>
         )}
       </div>

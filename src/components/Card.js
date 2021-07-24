@@ -35,9 +35,12 @@ function Card({ post }) {
 
   return (
     <>
-      <li className="card-container">
+      <li key={post._id} className="card-container">
         {isLoading ? (
-          <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+          <i
+            style={{ width: "100%" }}
+            className="fa fa-spinner fa-spin fa-3x fa-fw"
+          ></i>
         ) : (
           <>
             <div className="card-head">

@@ -57,8 +57,8 @@ function CommentCard({ post }) {
                 </div>
                 <div className="comment">
                   <p>{comment.text}</p>
-                  <EditDeleteComment comment={comment} postId={post._id} />
                 </div>
+                <EditDeleteComment comment={comment} postId={post._id} />
               </div>
             </div>
           );

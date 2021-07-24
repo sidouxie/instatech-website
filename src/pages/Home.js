@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "../components/AppContext";
+import NewFormPost from "../components/NewFormPost";
 import Thread from "../components/Thread";
 
 function Home() {
@@ -8,7 +9,10 @@ function Home() {
   return (
     <div>
       {uid ? (
-        <Thread />
+        <>
+          <NewFormPost />
+          <Thread />
+        </>
       ) : (
         <div className="main-home">
           <div className="head-cover">
