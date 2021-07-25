@@ -16,7 +16,7 @@ function DeleteCard(props) {
         }
       }}
     >
-      <IoTrash size="2rem" color="#333" />
+      <IoTrash size="2rem" color="#b289ff" cursor="pointer" />
     </div>
   );
 }

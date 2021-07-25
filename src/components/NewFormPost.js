@@ -14,6 +14,7 @@ function NewFormPost() {
 
   const dispatch = useDispatch();
 
+  const error = useSelector((state) => state.errorReducer.postError);
   const userData = useSelector((state) => state.userReducer);
 
   const handlePicture = (e) => {
@@ -24,11 +25,19 @@ function NewFormPost() {
 
   const handlePost = async () => {
     if (message || postPicture || video) {
-      const data = new FormData();
+      /* const data = new FormData();
       data.append("posterId", userData._id);
       data.append("message", message);
       if (file) data.appand("file", file);
-      data.append("video", video);
+      data.append("video", video); */
+
+      if (file) console.log(file);
+
+      const data = {
+        posterId: userData._id,
+        message: message,
+        video: video,
+      };
 
       await dispatch(addPost(data));
       dispatch(getPosts());
@@ -87,6 +96,7 @@ function NewFormPost() {
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
               ></textarea>
+              {!isEmpty(error.format) && <p>{error.format}</p>}
 
               {/* PREVISU */}
               {message || postPicture || video.length > 20 ? (

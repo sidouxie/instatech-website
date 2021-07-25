@@ -105,10 +105,23 @@ function Card({ post }) {
               )}
 
               <div className="sec-image">
-                <img
-                  src="./uploads/cover/cover_profil.jpg"
-                  alt="content user cover"
-                />
+                {post.video ? (
+                  <iframe
+                    src={post.video}
+                    frameBorder="0"
+                    marginHeight="0"
+                    marginWidth="0"
+                    scrolling="no"
+                    allow="accelerometre; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={post.video}
+                  ></iframe>
+                ) : (
+                  <img
+                    src="./uploads/cover/cover_profil.jpg"
+                    alt="content user cover"
+                  />
+                )}
               </div>
             </div>
 
