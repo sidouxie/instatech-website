@@ -28,10 +28,10 @@ function Profil({ uid }) {
     <>
       <main className="profil-main">
         <div className="head-cover">
-          <img src={userData.picture} alt="cover profil" />
+          <img src="./uploads/cover/cover_profil.jpg" alt="cover profil" />
         </div>
         <div className="avatar-profil">
-          <img src="./uploads/profil/avatar_user.jpg" alt="avatar-profil" />
+          <img src={userData.picture} alt="avatar-profil" />
           <UploadImage uid={uid} />
         </div>
         <div className="container">
