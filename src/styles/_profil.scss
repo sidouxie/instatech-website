@@ -23,6 +23,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -35,6 +36,43 @@
       border: 6px #4f259e solid;
       background-color: #4f259e;
       transform: translateY(-45%);
+    }
+
+    .icone-upload {
+      position: absolute;
+      transform: translate(150%, -35%);
+      border-radius: 50%;
+      background-color: blueviolet;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-upload {
+      position: relative;
+      margin: 1rem 0;
+      width: 120px;
+      height: 35px;
+      transform: translateY(-50px);
+      background: #4f259e;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #fff;
+      border: 2px #fff solid;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 150ms ease-out;
+      padding: 0.5rem 0.8rem;
+
+      &:hover {
+        background: transparent;
+        color: #4f259e;
+        border: 2px #4f259e solid;
+      }
     }
   }
 
