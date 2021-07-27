@@ -6,6 +6,7 @@ import { dateParser } from "../components/Utils";
 import { IoPeople, IoPerson, IoCloseOutline } from "react-icons/io5";
 import FollowHandler from "../components/FollowHandler";
 import UploadImage from "../components/UploadImage";
+import UploadCover from "../components/UploadCover";
 
 function Profil({ uid }) {
   const userData = useSelector((state) => state.userReducer);
@@ -28,7 +29,8 @@ function Profil({ uid }) {
     <>
       <main className="profil-main">
         <div className="head-cover">
-          <img src="./uploads/cover/cover_profil.jpg" alt="cover profil" />
+          <img src={userData.cover} alt="cover profil" />
+          <UploadCover uid={uid} />
         </div>
         <div className="avatar-profil">
           <img src={userData.picture} alt="avatar-profil" />

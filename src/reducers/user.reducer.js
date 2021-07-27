@@ -3,6 +3,7 @@ import {
   GET_USER,
   UNFOLLOW_USER,
   UPDATE_BIO,
+  UPLOAD_COVER,
   UPLOAD_PICTURE,
 } from "../actions/user.actions";
 
@@ -33,6 +34,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         picture: action.payload,
+      };
+    case UPLOAD_COVER:
+      return {
+        ...state,
+        cover: action.payload,
       };
 
     default:
