@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { addComment, getPosts } from "../actions/post.actions";
 import EditDeleteComment from "./EditDeleteComment";
 import { isEmpty, timestampParser } from "./Utils";
@@ -34,24 +35,29 @@ function CommentCard({ post }) {
                   : "comment-cont"
               }
             >
-              <img
-                className="avatar-icon"
-                src={
-                  !isEmpty(usersData[0]) &&
-                  usersData
-                    .map((user) => {
-                      if (user._id === comment.commenterId) return user.picture;
-                      else return null;
-                    })
-                    .join("")
-                }
-                alt="avatar user commenter pic"
-              />
+              <Link to={`/user/${comment.commenterId}`}>
+                <img
+                  className="avatar-icon"
+                  src={
+                    !isEmpty(usersData[0]) &&
+                    usersData
+                      .map((user) => {
+                        if (user._id === comment.commenterId)
+                          return user.picture;
+                        else return null;
+                      })
+                      .join("")
+                  }
+                  alt="avatar user commenter pic"
+                />
+              </Link>
 
               <div className="right-sec">
-                <div className="pseudo">
-                  <h3>{comment.commenterPseudo}</h3>
-                </div>
+                <Link to={`/user/${comment.commenterId}`}>
+                  <div className="pseudo">
+                    <h3>{comment.commenterPseudo}</h3>
+                  </div>
+                </Link>
                 <div className="timestamp">
                   <span> {timestampParser(comment.timestamp)} </span>
                 </div>

@@ -11,6 +11,7 @@ import LikeBtn from "./LikeBtn";
 import { updatePost } from "../actions/post.actions";
 import DeleteCard from "./DeleteCard";
 import CommentCard from "./CommentCard";
+import { Link } from "react-router-dom";
 
 function Card({ post }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,27 +46,31 @@ function Card({ post }) {
           <>
             <div className="card-head">
               <div className="sec-avatar">
-                <img
-                  className="avatar-icon"
-                  src={
-                    !isEmpty(usersData[0]) &&
-                    usersData
-                      .map((user) => {
-                        if (user._id === post.posterId) return user.picture;
-                        else return null;
-                      })
-                      .join("")
-                  }
-                  alt="avatar user profil"
-                />
+                <Link to={`/user/${post.posterId}`}>
+                  <img
+                    className="avatar-icon"
+                    src={
+                      !isEmpty(usersData[0]) &&
+                      usersData
+                        .map((user) => {
+                          if (user._id === post.posterId) return user.picture;
+                          else return null;
+                        })
+                        .join("")
+                    }
+                    alt="avatar user profil"
+                  />
+                </Link>
                 <div className="sec-name">
-                  <h3>
-                    {!isEmpty(usersData[0]) &&
-                      usersData.map((user) => {
-                        if (user._id === post.posterId) return user.pseudo;
-                        else return null;
-                      })}
-                  </h3>
+                  <Link to={`/user/${post.posterId}`}>
+                    <h3>
+                      {!isEmpty(usersData[0]) &&
+                        usersData.map((user) => {
+                          if (user._id === post.posterId) return user.pseudo;
+                          else return null;
+                        })}
+                    </h3>
+                  </Link>
                   <p>{dateParser(post.createdAt)}</p>
                 </div>
               </div>
