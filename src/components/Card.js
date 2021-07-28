@@ -44,35 +44,37 @@ function Card({ post }) {
         ) : (
           <>
             <div className="card-head">
-              <img
-                className="avatar-icon"
-                src={
-                  !isEmpty(usersData[0]) &&
-                  usersData
-                    .map((user) => {
-                      if (user._id === post.posterId) return user.picture;
-                      else return null;
-                    })
-                    .join("")
-                }
-                alt="avatar user profil"
-              />
-              <div className="sec-name">
-                <h3>
-                  {!isEmpty(usersData[0]) &&
-                    usersData.map((user) => {
-                      if (user._id === post.posterId) return user.pseudo;
-                      else return null;
-                    })}
-                </h3>
-                <p>{dateParser(post.createdAt)}</p>
+              <div className="sec-avatar">
+                <img
+                  className="avatar-icon"
+                  src={
+                    !isEmpty(usersData[0]) &&
+                    usersData
+                      .map((user) => {
+                        if (user._id === post.posterId) return user.picture;
+                        else return null;
+                      })
+                      .join("")
+                  }
+                  alt="avatar user profil"
+                />
+                <div className="sec-name">
+                  <h3>
+                    {!isEmpty(usersData[0]) &&
+                      usersData.map((user) => {
+                        if (user._id === post.posterId) return user.pseudo;
+                        else return null;
+                      })}
+                  </h3>
+                  <p>{dateParser(post.createdAt)}</p>
+                </div>
               </div>
               {userData._id === post.posterId ? (
                 <IoEllipsisHorizontal
                   onClick={() => setIsUpdated(!isUpdated)}
                   size="1.5rem"
                   color="#333"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", marginRight: "1.5rem" }}
                 />
               ) : (
                 <div className="chombit"></div>
@@ -104,25 +106,25 @@ function Card({ post }) {
                 </div>
               )}
 
-              <div className="sec-image">
-                {post.video ? (
-                  <iframe
-                    src={post.video}
-                    frameBorder="0"
-                    marginHeight="0"
-                    marginWidth="0"
-                    scrolling="no"
-                    allow="accelerometre; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title={post.video}
-                  ></iframe>
-                ) : (
-                  <img
-                    src="./uploads/cover/cover_profil.jpg"
-                    alt="content user cover"
-                  />
-                )}
-              </div>
+              {post.picture || post.video ? (
+                <div className="sec-image">
+                  {post.video && (
+                    <iframe
+                      src={post.video}
+                      frameBorder="0"
+                      marginHeight="0"
+                      marginWidth="0"
+                      scrolling="no"
+                      allow="accelerometre; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={post.video}
+                    ></iframe>
+                  )}
+                  {post.picture && (
+                    <img src={post.picture} alt="content user cover" />
+                  )}
+                </div>
+              ) : null}
             </div>
 
             <div className="card-footer">

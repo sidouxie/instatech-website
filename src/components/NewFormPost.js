@@ -25,19 +25,11 @@ function NewFormPost() {
 
   const handlePost = async () => {
     if (message || postPicture || video) {
-      /* const data = new FormData();
+      const data = new FormData();
       data.append("posterId", userData._id);
       data.append("message", message);
-      if (file) data.appand("file", file);
-      data.append("video", video); */
-
-      if (file) console.log(file);
-
-      const data = {
-        posterId: userData._id,
-        message: message,
-        video: video,
-      };
+      if (file) data.append("file", file);
+      if (video) data.append("video", video);
 
       await dispatch(addPost(data));
       dispatch(getPosts());
@@ -66,6 +58,7 @@ function NewFormPost() {
           findLink.splice(i, 1);
           setMessage(findLink.join(" "));
           setPostPicture("");
+          setFile(null);
         }
       }
     };
