@@ -172,6 +172,30 @@
       }
     }
 
+    .btn-follow {
+      margin-top: 1rem;
+      button {
+        background: #4f259e;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 400;
+        color: #fff;
+        border: 2px #fff solid;
+        border-radius: 30px;
+        padding: 0.5rem 2rem;
+        cursor: pointer;
+        transition: all 150ms ease-out;
+        font-size: 0.9rem;
+        text-transform: capitalize;
+
+        &:hover {
+          border: 2px #4f259e solid;
+          background-color: transparent;
+          color: #4f259e;
+        }
+      }
+    }
+
     .timestamp {
       color: #63577bbd;
     }

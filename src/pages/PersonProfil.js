@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
 import { dateParser } from "../components/Utils";
-import { IoPerson, IoPeople } from "react-icons/io5";
+import { IoPerson, IoPeople, IoCloseOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import FollowHandler from "../components/FollowHandler";
 
 function PersonProfil({ uid }) {
   const [person, setPerson] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [followersPopup, setFollowersPopup] = useState(false);
+  const [followingPopup, setFollowingPopup] = useState(false);
   const { id } = useParams();
   const usersData = useSelector((state) => state.usersReducer);
 
@@ -47,6 +50,9 @@ function PersonProfil({ uid }) {
                 <div className="section-bio">
                   <p> {person.bio} </p>
                 </div>
+                <div className="btn-follow">
+                  <FollowHandler idTofollow={person._id} />
+                </div>
 
                 <div className="timestamp">
                   <h5>Membre depuis le : {dateParser(person.createdAt)}</h5>
@@ -55,7 +61,7 @@ function PersonProfil({ uid }) {
                 <div className="sec-follow">
                   <div
                     className="followers"
-                    onClick={() => console.log("follower")}
+                    onClick={() => setFollowersPopup(!followersPopup)}
                   >
                     <div className="first">
                       <IoPeople size="2.5rem" color="#63577b" />
@@ -66,7 +72,7 @@ function PersonProfil({ uid }) {
 
                   <div
                     className="following"
-                    onClick={() => console.log("following")}
+                    onClick={() => setFollowingPopup(!followingPopup)}
                   >
                     <div className="first">
                       <IoPerson size="2rem" color="#63577b" />
@@ -78,6 +84,85 @@ function PersonProfil({ uid }) {
               </div>
             </div>
           </main>
+          {followersPopup && (
+            <>
+              <div className="modal-popup">
+                <div className="followers-popup">
+                  <IoCloseOutline
+                    onClick={() => setFollowersPopup(!followersPopup)}
+                    size="2rem"
+                    color="#333"
+                  />
+                  <br />
+                  <h1>Abonnées :</h1>
+
+                  <ul>
+                    {usersData.map((user) => {
+                      for (let i = 0; i < person.followers.length; i++) {
+                        if (user._id === person.followers[i]) {
+                          return (
+                            <>
+                              <li key={user._id}>
+                                <Link to={`/user/${user._id}`}>
+                                  <img src={user.picture} alt="user avatar" />
+                                </Link>
+                                <Link to={`/user/${user._id}`}>
+                                  <h5>{user.pseudo}</h5>
+                                </Link>
+                                <FollowHandler idTofollow={user._id} />
+                              </li>
+                            </>
+                          );
+                        }
+                      }
+                      return null;
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </>
+          )}
+
+          {followingPopup && (
+            <>
+              <div className="modal-popup">
+                <div className="followers-popup">
+                  <IoCloseOutline
+                    onClick={() => setFollowingPopup(!followingPopup)}
+                    size="2rem"
+                    color="#333"
+                  />
+                  <br />
+                  <h1>Abonnements :</h1>
+
+                  <ul>
+                    {usersData.map((user) => {
+                      for (let i = 0; i < person.following.length; i++) {
+                        if (user._id === person.following[i]) {
+                          return (
+                            <>
+                              <li key={user._id}>
+                                <Link to={`/user/${user._id}`}>
+                                  <img src={user.picture} alt="user avatar" />
+                                </Link>
+                                <Link to={`/user/${user._id}`}>
+                                  <h5>{user.pseudo}</h5>
+                                </Link>
+                                <div className="follow-handler">
+                                  <FollowHandler idTofollow={user._id} />
+                                </div>
+                              </li>
+                            </>
+                          );
+                        }
+                      }
+                      return null;
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </>
+          )}
         </>
       )}
     </>
