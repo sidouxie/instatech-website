@@ -8,7 +8,6 @@ function Layout(props) {
       <Navbar />
       {props.children}
       <BotNav />
-      <div>Footer</div>
     </>
   );
 }

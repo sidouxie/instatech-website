@@ -357,6 +357,14 @@
         padding: 0.2rem 0;
         box-shadow: 0px 0px 5px 1px #eae3f7;
 
+        a {
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
         h5 {
           letter-spacing: 0.5px;
           font-size: 0.9rem;

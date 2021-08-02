@@ -29,20 +29,22 @@ header {
     .login-btn {
       button {
         font-size: 0.8rem;
-        text-transform: uppercase;
         letter-spacing: 1px;
         font-weight: 400;
-        border: 2px #fff solid;
+        border: 1px #824ede solid;
         border-radius: 5px;
-        background-color: transparent;
-        color: #fff;
+        background-color: #673ab7;
+        color: #ebe2ff;
         padding: 0.3rem 0.5rem;
         margin-right: 1rem;
         cursor: pointer;
+        box-shadow: 0px 0px 2px 1px #402571;
 
         &:hover {
-          background-color: #fff;
           color: #4f259e;
+        }
+        &:active {
+          box-shadow: inset 0px 0px 2px 1px #48297f;
         }
       }
     }

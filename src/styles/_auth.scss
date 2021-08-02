@@ -9,6 +9,13 @@
   text-align: center;
   margin-top: 4rem;
 
+  h1 {
+    color: #392361;
+  }
+  h3 {
+    color: #3923619e;
+  }
+
   form {
     max-width: 600px;
     height: auto;
@@ -26,8 +33,21 @@
       @include input;
     }
 
+    p {
+      color: #3923619e;
+    }
+
+    a {
+      color: $color-primary;
+
+      &:hover {
+        color: $color-secondary;
+      }
+    }
+
     .btn-style {
       @include btn-style;
+      border: 2px #4f259e solid !important;
     }
 
     .active {

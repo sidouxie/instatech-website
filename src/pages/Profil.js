@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateBio } from "../actions/user.actions";
 import { dateParser } from "../components/Utils";
@@ -119,8 +119,12 @@ function Profil({ uid }) {
                       return (
                         <>
                           <li key={user._id}>
-                            <img src={user.picture} alt="user avatar" />
-                            <h5>{user.pseudo}</h5>
+                            <Link to={`/user/${user._id}`}>
+                              <img src={user.picture} alt="user avatar" />
+                            </Link>
+                            <Link to={`/user/${user._id}`}>
+                              <h5>{user.pseudo}</h5>
+                            </Link>
                             <FollowHandler idTofollow={user._id} />
                           </li>
                         </>
@@ -154,8 +158,12 @@ function Profil({ uid }) {
                       return (
                         <>
                           <li key={user._id}>
-                            <img src={user.picture} alt="user avatar" />
-                            <h5>{user.pseudo}</h5>
+                            <Link to={`/user/${user._id}`}>
+                              <img src={user.picture} alt="user avatar" />
+                            </Link>
+                            <Link to={`/user/${user._id}`}>
+                              <h5>{user.pseudo}</h5>
+                            </Link>
                             <div className="follow-handler">
                               <FollowHandler idTofollow={user._id} />
                             </div>

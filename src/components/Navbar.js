@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Logout from "./Logout";
 import { UidContext } from "./AppContext";
 import { IoChevronDown } from "react-icons/io5";
+import { ReactComponent as Logo } from "./assets/instatech_logo.svg";
 
 function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -16,7 +17,7 @@ function Navbar() {
       <div className="menu-content">
         <div className="logo">
           <NavLink to="/">
-            <h3>InstaTech</h3>
+            <Logo style={{ fill: "#ebe2ff", width: "120px", height: "100%" }} />
           </NavLink>
         </div>
         {uid ? (
@@ -29,9 +30,7 @@ function Navbar() {
                 <div
                   className="icon-profil"
                   style={{ backgroundImage: `url(${userData.picture})` }}
-                >
-                  {/* <img src={userData.picture} alt="avatar-profil" /> */}
-                </div>
+                ></div>
               </NavLink>
               <div className="sub-menu" onClick={() => setIsMobile(!isMobile)}>
                 <IoChevronDown color="#fff" size="1.5em" />
@@ -42,8 +41,8 @@ function Navbar() {
         ) : (
           <>
             <div className="login-btn">
-              <button onClick={() => history.push("/signin")}>Login</button>
-              <button onClick={() => history.push("/signup")}>inscrire</button>
+              <button onClick={() => history.push("/signin")}>Connectez</button>
+              {/* <button onClick={() => history.push("/signup")}>inscrire</button> */}
             </div>
           </>
         )}
